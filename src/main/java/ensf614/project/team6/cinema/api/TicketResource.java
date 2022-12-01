@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/api/cinema")
+@RequestMapping("/api/public/cinema")
 public class TicketResource {
 
     @Autowired

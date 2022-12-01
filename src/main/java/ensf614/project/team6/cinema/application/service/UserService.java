@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
+import java.util.Optional;
 
 @Component
 public class UserService {
@@ -35,8 +36,7 @@ public class UserService {
         userRepository.saveUser(user);
     }
 
-    public void login(CredentialsRequest credentialsRequest) {
-        User user = userRepository.findUserByEmail(credentialsRequest.getEmail()).orElseThrow(UserNotFoundException::new);
-        //TODO
+    public Optional<User> findUserByEmail(String email) {
+        return userRepository.findUserByEmail(email);
     }
 }

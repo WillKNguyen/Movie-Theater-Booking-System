@@ -1,7 +1,6 @@
 package ensf614.project.team6.cinema.domain.user;
 
 import ensf614.project.team6.cinema.domain.user.exceptions.InvalidEmailFormatException;
-import ensf614.project.team6.cinema.domain.user.credentials.PasswordEncryptor;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
@@ -16,9 +15,7 @@ public class UserFactory {
         validateEmail(email);
         validatePassword(password);
 
-        String encryptedPassword = PasswordEncryptor.encryptPassword(password);
-
-        return new User(name, email, encryptedPassword, roles);
+        return new User(name, email, password, roles);
     }
 
     private void validateEmail(String email) {
@@ -26,6 +23,6 @@ public class UserFactory {
     }
 
     private void validatePassword(String password){
-        //TODO
+        if (password.isBlank()) throw new InvalidEmailFormatException();
     }
 }

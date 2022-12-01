@@ -16,10 +16,10 @@ public class WebSecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/user/registered/**")
-                .authenticated()
-                .antMatchers("/api/user/**")
+                .antMatchers("/api/public/**")
                 .permitAll()
+                .antMatchers("/api/private/**")
+                .authenticated()
                 .and()
                 .formLogin()
                 .defaultSuccessUrl("/")
