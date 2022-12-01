@@ -12,7 +12,7 @@ public class TheaterResponse {
     private final String name;
 
     public TheaterResponse(Theater theater){
-        this.id=theater.getId();
+        this.id=String.valueOf(theater.getId());
         this.name=theater.getName();
     }
 }

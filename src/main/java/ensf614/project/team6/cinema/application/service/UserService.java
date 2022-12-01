@@ -1,35 +1,42 @@
 package ensf614.project.team6.cinema.application.service;
 
+import ensf614.project.team6.cinema.application.service.exceptions.RoleNotFoundException;
 import ensf614.project.team6.cinema.application.service.request.CredentialsRequest;
 import ensf614.project.team6.cinema.application.service.request.UserInfoRequest;
 import ensf614.project.team6.cinema.application.service.exceptions.UserAlreadyExistsException;
 import ensf614.project.team6.cinema.application.service.exceptions.UserNotFoundException;
-import ensf614.project.team6.cinema.domain.user.User;
-import ensf614.project.team6.cinema.domain.user.UserFactory;
-import ensf614.project.team6.cinema.domain.user.UserRepository;
+
+import ensf614.project.team6.cinema.domain.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
+
 @Component
 public class UserService {
+
+    private final static String USER_ROLE="ROLE_USER";
+
+    @Autowired
+    private RoleRepository roleRepository;
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private UserFactory userFactory;
 
     public void registerUser(UserInfoRequest userInfoRequest) {
-        if (userRepository.getUserByEmail(userInfoRequest.getEmail()).isPresent())
+        if (userRepository.findUserByEmail(userInfoRequest.getEmail()).isPresent())
             throw new UserAlreadyExistsException();
 
-        String encryptedPassword = Encryptor.encryptPassword(userInfoRequest.getPassword());
-        User user = userFactory.create(userInfoRequest.getName(), userInfoRequest.getEmail(), encryptedPassword);
+        Role role=roleRepository.findRoleByTitle(USER_ROLE).orElseThrow(RoleNotFoundException::new);
+
+        User user = userFactory.createUser(userInfoRequest.getName(), userInfoRequest.getEmail(), userInfoRequest.getPassword(), Collections.singleton(role));
 
         userRepository.saveUser(user);
     }
 
     public void login(CredentialsRequest credentialsRequest) {
-        User user = userRepository.getUserByEmail(credentialsRequest.getEmail()).orElseThrow(UserNotFoundException::new);
+        User user = userRepository.findUserByEmail(credentialsRequest.getEmail()).orElseThrow(UserNotFoundException::new);
         //TODO
     }
 }

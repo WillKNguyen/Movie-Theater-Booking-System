@@ -9,7 +9,6 @@ import ensf614.project.team6.cinema.application.service.response.TheaterResponse
 import ensf614.project.team6.cinema.domain.bank.Bank;
 import ensf614.project.team6.cinema.domain.tickets.Ticket;
 import ensf614.project.team6.cinema.domain.tickets.TicketRepository;
-import ensf614.project.team6.cinema.domain.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +24,7 @@ public class TicketService {
     @Autowired
     private Bank bank;
 
-    private final static User DEFAULT_USER = new User("To Delete", "todelete@gmail.com", "deleteMe");
+    //private final static User DEFAULT_USER = new User("To Delete", "todelete@gmail.com", "deleteMe", Collections.singleton(new Role("ROLE_USER")));
 
     public List<MovieResponse> getAvailableMovies() {
         return ticketRepository.getAllMovies().stream().map(MovieResponse::new).collect(Collectors.toList());
@@ -44,13 +43,13 @@ public class TicketService {
     }
 
     public void purchaseTicket(String ticketId, String creditCardNumber) {
-        Ticket ticket=ticketRepository.getTicketById(ticketId).orElseThrow(TicketNotFoundException::new);
+        Ticket ticket=ticketRepository.findTicketById(ticketId).orElseThrow(TicketNotFoundException::new);
 
         if(ticket.getOwner()!=null) throw new TicketUnavailableException();
 
         bank.processPayment(ticket.getPrice(), creditCardNumber);
         //ticket.setOwner(); TODO Depends on the way we login
-        ticket.setOwner(DEFAULT_USER);
+        //ticket.setOwner(DEFAULT_USER);
 
         ticketRepository.saveTicket(ticket);
     }

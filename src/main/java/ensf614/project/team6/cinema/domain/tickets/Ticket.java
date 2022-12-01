@@ -5,19 +5,27 @@ import ensf614.project.team6.cinema.domain.tickets.components.Seat;
 import ensf614.project.team6.cinema.domain.tickets.components.Theater;
 import ensf614.project.team6.cinema.domain.user.User;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "tickets")
 public class Ticket {
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private LocalDateTime showTime;
+    @ManyToOne
     private User owner;
+    @ManyToOne
     private Movie movie;
+    @ManyToOne
     private Theater theater;
+    @ManyToOne
     private Seat seat;
     private Double price;
 
-    public Ticket(String id, LocalDateTime showTime, User owner, Movie movie, Theater theater, Seat seat, Double price) {
-        this.id = id;
+    public Ticket(LocalDateTime showTime, User owner, Movie movie, Theater theater, Seat seat, Double price) {
         this.showTime = showTime;
         this.owner = owner;
         this.movie = movie;
@@ -26,7 +34,11 @@ public class Ticket {
         this.price = price;
     }
 
-    public String getId() {
+    public Ticket(){
+
+    }
+
+    public Integer getId() {
         return id;
     }
 

@@ -1,4 +1,4 @@
-package ensf614.project.team6.cinema.application.service;
+package ensf614.project.team6.cinema.domain.user.credentials;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -7,7 +7,7 @@ import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.Base64;
 
-public class Encryptor {
+public class PasswordEncryptor {
     private static final String A_SALT = "!$team$6$!";
 
     public static String encryptPassword(String password){

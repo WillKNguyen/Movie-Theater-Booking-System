@@ -15,8 +15,8 @@ public class SeatResponse {
 
     public SeatResponse(Ticket ticket){
         Seat seat=ticket.getSeat();
-        this.id=seat.getId();
+        this.id=String.valueOf(seat.getId());
         this.number=seat.getNumber();
-        this.relatedTicketId=ticket.getId();
+        this.relatedTicketId=String.valueOf(ticket.getId());
     }
 }

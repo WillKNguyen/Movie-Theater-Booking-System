@@ -1,15 +1,17 @@
 package ensf614.project.team6.cinema.domain.tickets.components;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "seats")
 public class Seat {
-    private final String id;
-    private final String number;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private String number;
 
-    public Seat(String id, String number) {
-        this.id = id;
-        this.number = number;
-    }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 

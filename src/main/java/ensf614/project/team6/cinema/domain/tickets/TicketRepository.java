@@ -15,7 +15,7 @@ public interface TicketRepository {
     List<LocalDateTime> getMovieStartTimes(String movieId, String theaterId);
     List<Ticket> getTickets(String movieId, String theaterId, LocalDateTime startTime);
 
-    Optional<Ticket> getTicketById(String ticketId);
+    Optional<Ticket> findTicketById(String ticketId);
 
     void saveTicket(Ticket ticket);
 }

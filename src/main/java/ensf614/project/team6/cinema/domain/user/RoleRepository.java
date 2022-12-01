@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public interface UserRepository {
-    void saveUser(User user);
-    Optional<User> findUserByEmail(String email);
+public interface RoleRepository {
+    Optional<Role> findRoleByTitle(String title);
 }

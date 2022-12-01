@@ -12,7 +12,7 @@ public class MovieResponse {
     private final String title;
 
     public MovieResponse(Movie movie) {
-        this.id = movie.getId();
+        this.id = String.valueOf(movie.getId());
         this.title = movie.getTitle();
     }
 }
