@@ -1,10 +1,10 @@
-package ensf614.project.team6.cinema;
+package ensf614.project.team6.cinema.gui;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class AppController {
+public class GuiController {
     
     @GetMapping("")
     public String index() {
@@ -14,5 +14,10 @@ public class AppController {
     @GetMapping("movie_list")
     public String movieList() {
         return "movie_list";
+    }
+
+    @GetMapping("register")
+    public String register() {
+        return "register";
     }
 }
