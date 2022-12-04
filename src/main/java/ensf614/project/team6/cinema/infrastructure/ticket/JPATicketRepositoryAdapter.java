@@ -25,17 +25,17 @@ public class JPATicketRepositoryAdapter implements TicketRepository {
 
     @Override
     public List<ShowRoom> getShowRoomsPlayingMovie(String movieId, LocalDateTime from, LocalDateTime to) {
-        return jpaTicketRepository.getShowRoomsPlayingMovie(movieId, from, to);
+        return jpaTicketRepository.getShowRoomsPlayingMovie(Integer.valueOf(movieId), from, to);
     }
 
     @Override
     public List<LocalDateTime> getMovieStartTimes(String movieId, String showRoomId, LocalDateTime from, LocalDateTime to) {
-        return jpaTicketRepository.getMovieStartTimesByMovieIdAndShowRoomId(movieId, showRoomId, from, to);
+        return jpaTicketRepository.getMovieStartTimesByMovieIdAndShowRoomId(Integer.valueOf(movieId), Integer.valueOf(showRoomId), from, to);
     }
 
     @Override
     public List<Ticket> getTickets(String movieId, String showRoomId, LocalDateTime startTime) {
-        return jpaTicketRepository.getTicketsByMovieIdShowRoomIdAndStartTime(movieId, showRoomId, startTime);
+        return jpaTicketRepository.getTicketsByMovieIdShowRoomIdAndStartTime(Integer.valueOf(movieId), Integer.valueOf(showRoomId), startTime);
 
     }
 
