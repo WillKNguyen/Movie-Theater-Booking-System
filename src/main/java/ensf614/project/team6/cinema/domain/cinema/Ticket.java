@@ -1,12 +1,10 @@
-package ensf614.project.team6.cinema.domain.tickets;
+package ensf614.project.team6.cinema.domain.cinema;
 
-import ensf614.project.team6.cinema.domain.tickets.components.Movie;
-import ensf614.project.team6.cinema.domain.tickets.components.Seat;
-import ensf614.project.team6.cinema.domain.tickets.components.Theater;
 import ensf614.project.team6.cinema.domain.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Entity
 @Table(name = "tickets")
@@ -20,16 +18,18 @@ public class Ticket {
     @ManyToOne
     private Movie movie;
     @ManyToOne
-    private Theater theater;
+    private ShowRoom showRoom;
     @ManyToOne
     private Seat seat;
     private Double price;
 
-    public Ticket(LocalDateTime showTime, User owner, Movie movie, Theater theater, Seat seat, Double price) {
+
+
+    public Ticket(LocalDateTime showTime, User owner, Movie movie, ShowRoom showRoom, Seat seat, Double price) {
         this.showTime = showTime;
         this.owner = owner;
         this.movie = movie;
-        this.theater = theater;
+        this.showRoom = showRoom;
         this.seat = seat;
         this.price = price;
     }
@@ -58,8 +58,8 @@ public class Ticket {
         return movie;
     }
 
-    public Theater getTheater() {
-        return theater;
+    public ShowRoom getShowRoom() {
+        return showRoom;
     }
 
     public Seat getSeat() {
@@ -70,5 +70,8 @@ public class Ticket {
         return price;
     }
 
+    public Boolean isAvailable(){
+        return Optional.of(owner).isEmpty();
+    }
 
 }

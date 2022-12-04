@@ -13,4 +13,6 @@ public class UserInfoRequest {
     private String email;
     @NonNull
     private String password;
+    @NonNull
+    private String creditCardNumber;
 }

@@ -11,11 +11,11 @@ public class UserFactory {
 
     private final static String VALID_EMAIL_REGEX = "^[a-zA-Z][\\w+\\.]+\\w@[a-zA-Z]([\\w+]+\\.)+[a-zA-Z][\\w]{1,3}$";
 
-    public User createUser(String name, String email, String password, Set<Role> roles) {
+    public User createUser(String name, String email, String password, String creditCardNumber, Set<Role> roles) {
         validateEmail(email);
         validatePassword(password);
 
-        return new User(name, email, password, roles);
+        return new User(name, email, password, creditCardNumber, roles);
     }
 
     private void validateEmail(String email) {

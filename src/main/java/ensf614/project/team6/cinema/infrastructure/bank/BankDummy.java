@@ -1,6 +1,7 @@
 package ensf614.project.team6.cinema.infrastructure.bank;
 
 import ensf614.project.team6.cinema.domain.bank.Bank;
+import ensf614.project.team6.cinema.domain.bank.Payment;
 import ensf614.project.team6.cinema.domain.bank.exceptions.BankTransactionNotFound;
 import ensf614.project.team6.cinema.domain.bank.exceptions.InvalidCreditCardNumber;
 import org.springframework.stereotype.Component;
@@ -19,12 +20,14 @@ public class BankDummy implements Bank {
     }
 
     @Override
-    public String processPayment(Double amount, String creditCardNumber) {
+    public Payment processPayment(Double amount, String creditCardNumber) {
         validateCreditCard(creditCardNumber);
 
         String referenceNumber = "trans-"+amount+"$-"+(new Random().nextInt(Integer.MAX_VALUE - 100000000) + 100000000);
 
         processedPayment.add(referenceNumber);
+        //TODO send email
+        //TODO create the payment
         return referenceNumber;
     }
 

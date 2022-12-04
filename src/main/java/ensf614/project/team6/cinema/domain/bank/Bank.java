@@ -4,6 +4,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface Bank {
-    String processPayment(Double amount, String creditCardNumber);
+    Payment processPayment(Double amount, String creditCardNumber);
     void cancelPayment(String referenceNumber);
 }

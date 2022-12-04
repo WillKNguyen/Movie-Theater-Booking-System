@@ -3,12 +3,15 @@ package ensf614.project.team6.cinema.api;
 import ensf614.project.team6.cinema.application.service.request.CredentialsRequest;
 import ensf614.project.team6.cinema.application.service.request.UserInfoRequest;
 import ensf614.project.team6.cinema.application.service.UserService;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.Principal;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -46,8 +49,8 @@ public class UserResource {
     }
 
     @PostMapping("/private/user/pay_membership")
-    public void payMembership(@RequestBody CredentialsRequest credentialsRequest) {
-        System.out.println("paid");
-        //
+    public void payMembership(Principal principal) {
+        String email = principal.getName();
+        userService.payMembership(email);
     }
 }

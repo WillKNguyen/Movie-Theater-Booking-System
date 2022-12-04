@@ -1,4 +1,4 @@
-package ensf614.project.team6.cinema.domain.tickets.components;
+package ensf614.project.team6.cinema.domain.cinema;
 
 import javax.persistence.*;
 

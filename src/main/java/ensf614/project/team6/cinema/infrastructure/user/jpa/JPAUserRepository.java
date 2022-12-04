@@ -1,6 +1,5 @@
 package ensf614.project.team6.cinema.infrastructure.user.jpa;
 
-import ensf614.project.team6.cinema.domain.tickets.Ticket;
 import ensf614.project.team6.cinema.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;

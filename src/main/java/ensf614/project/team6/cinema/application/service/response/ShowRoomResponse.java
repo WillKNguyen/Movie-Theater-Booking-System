@@ -1,18 +1,18 @@
 package ensf614.project.team6.cinema.application.service.response;
 
-import ensf614.project.team6.cinema.domain.tickets.components.Theater;
+import ensf614.project.team6.cinema.domain.cinema.ShowRoom;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
 
 @Data
 @Setter(AccessLevel.NONE)
-public class TheaterResponse {
+public class ShowRoomResponse {
     private final String id;
     private final String name;
 
-    public TheaterResponse(Theater theater){
-        this.id=String.valueOf(theater.getId());
-        this.name=theater.getName();
+    public ShowRoomResponse(ShowRoom showRoom){
+        this.id=String.valueOf(showRoom.getId());
+        this.name= showRoom.getName();
     }
 }

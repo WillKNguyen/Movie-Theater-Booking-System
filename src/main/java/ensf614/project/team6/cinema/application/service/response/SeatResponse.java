@@ -1,7 +1,7 @@
 package ensf614.project.team6.cinema.application.service.response;
 
-import ensf614.project.team6.cinema.domain.tickets.Ticket;
-import ensf614.project.team6.cinema.domain.tickets.components.Seat;
+import ensf614.project.team6.cinema.domain.cinema.Ticket;
+import ensf614.project.team6.cinema.domain.cinema.Seat;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;

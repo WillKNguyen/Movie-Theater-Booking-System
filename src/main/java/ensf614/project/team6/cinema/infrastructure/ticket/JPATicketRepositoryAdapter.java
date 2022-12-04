@@ -1,9 +1,9 @@
 package ensf614.project.team6.cinema.infrastructure.ticket;
 
-import ensf614.project.team6.cinema.domain.tickets.Ticket;
-import ensf614.project.team6.cinema.domain.tickets.TicketRepository;
-import ensf614.project.team6.cinema.domain.tickets.components.Movie;
-import ensf614.project.team6.cinema.domain.tickets.components.Theater;
+import ensf614.project.team6.cinema.domain.cinema.Ticket;
+import ensf614.project.team6.cinema.domain.cinema.TicketRepository;
+import ensf614.project.team6.cinema.domain.cinema.Movie;
+import ensf614.project.team6.cinema.domain.cinema.ShowRoom;
 import ensf614.project.team6.cinema.infrastructure.ticket.jpa.JPATicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,18 +23,18 @@ public class JPATicketRepositoryAdapter implements TicketRepository {
     }
 
     @Override
-    public List<Theater> getTheatersPlayingMovie(String movieId) {
-        return jpaTicketRepository.getTheatersPlayingMovie(movieId);
+    public List<ShowRoom> getShowRoomsPlayingMovie(String movieId) {
+        return jpaTicketRepository.getShowRoomsPlayingMovie(movieId);
     }
 
     @Override
-    public List<LocalDateTime> getMovieStartTimes(String movieId, String theaterId) {
-        return jpaTicketRepository.getMovieStartTimesByMovieIdAndTheater(movieId,theaterId);
+    public List<LocalDateTime> getMovieStartTimes(String movieId, String showRoomId) {
+        return jpaTicketRepository.getMovieStartTimesByMovieIdAndTheater(movieId,showRoomId);
     }
 
     @Override
-    public List<Ticket> getTickets(String movieId, String theaterId, LocalDateTime startTime) {
-        return jpaTicketRepository.getTicketsByMovieIdTheaterIdAndStartTime(movieId,theaterId,startTime);
+    public List<Ticket> getTickets(String movieId, String showRoomId, LocalDateTime startTime) {
+        return jpaTicketRepository.getTicketsByMovieIdShowRoomIdAndStartTime(movieId,showRoomId,startTime);
 
     }
 

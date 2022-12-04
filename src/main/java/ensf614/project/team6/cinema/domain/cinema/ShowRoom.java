@@ -1,10 +1,10 @@
-package ensf614.project.team6.cinema.domain.tickets.components;
+package ensf614.project.team6.cinema.domain.cinema;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "theaters")
-public class Theater {
+@Table(name = "showrooms")
+public class ShowRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
