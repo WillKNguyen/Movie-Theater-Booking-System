@@ -2,17 +2,12 @@ package ensf614.project.team6.cinema.infrastructure.bank;
 
 import ensf614.project.team6.cinema.domain.bank.Bank;
 import ensf614.project.team6.cinema.domain.bank.Payment;
-import ensf614.project.team6.cinema.domain.bank.exceptions.BankTransactionNotFound;
 import ensf614.project.team6.cinema.domain.bank.exceptions.InvalidCreditCardNumber;
 import ensf614.project.team6.cinema.domain.bank.exceptions.PaymentAlreadyRefunded;
 import ensf614.project.team6.cinema.infrastructure.bank.smtp.SMTPEmailSender;
 import ensf614.project.team6.cinema.infrastructure.bank.smtp.server.GmailServerAccessSessionGenerator;
 import ensf614.project.team6.cinema.infrastructure.bank.smtp.server.ServerAccessSessionGenerator;
 import org.springframework.stereotype.Component;
-
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
 
 @Component
 public class BankDummy implements Bank {
@@ -25,25 +20,25 @@ public class BankDummy implements Bank {
     }
 
     @Override
-    public Payment processPayment(Double amount, String creditCardNumber, String email) {
+    public Payment processPayment(Double amount, String creditCardNumber, String email, String description) {
         validateCreditCard(creditCardNumber);
 
-        System.out.println("Payment processed");
+        System.out.println("Payment processed: "+amount+"$");
 
-        smtpEmailSender.sendMessage(email,"Your payment made to CINEMA-ENSF614-TEAM6 for "+amount+"$ was processed successfully");
+        smtpEmailSender.sendMessage(email,"Your payment made to CINEMA-ENSF614-TEAM6 for "+amount+"$ was processed successfully.\n\n"+ description);
 
-        return new Payment(creditCardNumber,amount);
+        return new Payment(creditCardNumber,amount, email);
     }
 
     @Override
-    public Payment cancelPayment(Payment paymentToRefund, String email) {
+    public Payment cancelPayment(Payment paymentToRefund, Double prcRefunded) {
         validatePayment(paymentToRefund);
 
         paymentToRefund.markAsRefunded();
 
-        System.out.println("Payment refunded");
+        System.out.println("Payment refunded ("+prcRefunded+"%): " +paymentToRefund.getAmount()*prcRefunded/100+"$");
 
-        smtpEmailSender.sendMessage(email,"Your payment made to CINEMA-ENSF614-TEAM6 for "+paymentToRefund.getAmount()+"$ was refunded successfully");
+        smtpEmailSender.sendMessage(paymentToRefund.getContactEmail(),"Your payment made to CINEMA-ENSF614-TEAM6 for "+paymentToRefund.getAmount()*prcRefunded/100+"$ ("+prcRefunded+"%) was refunded successfully");
         return paymentToRefund;
     }
 
@@ -52,6 +47,6 @@ public class BankDummy implements Bank {
     }
 
     private void validatePayment(Payment payment){
-        if(payment.getWasRefunded()) throw new PaymentAlreadyRefunded();
+        if(payment.wasRefunded()) throw new PaymentAlreadyRefunded();
     }
 }

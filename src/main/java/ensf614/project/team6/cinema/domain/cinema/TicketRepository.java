@@ -8,9 +8,9 @@ import java.util.Optional;
 
 @Component
 public interface TicketRepository {
-    List<Movie> getAllMovies();
-    List<ShowRoom> getShowRoomsPlayingMovie(String movieId);
-    List<LocalDateTime> getMovieStartTimes(String movieId, String showRoomId);
+    List<Movie> getAllMovies(LocalDateTime from, LocalDateTime to);
+    List<ShowRoom> getShowRoomsPlayingMovie(String movieId, LocalDateTime from, LocalDateTime to);
+    List<LocalDateTime> getMovieStartTimes(String movieId, String showRoomId, LocalDateTime from, LocalDateTime to);
     List<Ticket> getTickets(String movieId, String showRoomId, LocalDateTime startTime);
 
     Optional<Ticket> findTicketById(String ticketId);

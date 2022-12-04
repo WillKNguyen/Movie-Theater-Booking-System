@@ -24,12 +24,10 @@ public class UserService extends GlobalService{
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
     private UserFactory userFactory;
 
     public void registerUser(UserInfoRequest userInfoRequest) {
-        if (userRepository.findUserByEmail(userInfoRequest.getEmail()).isPresent())
+        if (getUserRepository().findUserByEmail(userInfoRequest.getEmail()).isPresent())
             throw new UserAlreadyExistsException();
 
         Role role=roleRepository.findRoleByTitle(USER_ROLE).orElseThrow(RoleNotFoundException::new);
@@ -37,21 +35,21 @@ public class UserService extends GlobalService{
         User user = userFactory.createUser(userInfoRequest.getName(), userInfoRequest.getEmail(),
                 userInfoRequest.getPassword(), userInfoRequest.getCreditCardNumber(), Collections.singleton(role));
 
-        userRepository.saveUser(user);
+        getUserRepository().saveUser(user);
     }
 
     public Optional<User> findUserByEmail(String email) {
-        return userRepository.findUserByEmail(email);
+        return getUserRepository().findUserByEmail(email);
     }
 
     public void payMembership(String email) {
-        User user=userRepository.findUserByEmail(email).orElseThrow(UserNotFoundException::new);
+        User user=getUserRepository().findUserByEmail(email).orElseThrow(UserNotFoundException::new);
 
-        Payment payment=getBank().processPayment(MEMBERSHIP_FEE, user.getCreditCardNumber());
+        Payment payment=getBank().processPayment(MEMBERSHIP_FEE, user.getCreditCardNumber(), email, "Yearly Membership");
 
         user.addMembershipPayment(payment);
         user.setEndOfSubscription(LocalDate.now().plusYears(1));
 
-        userRepository.saveUser(user);
+        getUserRepository().saveUser(user);
     }
 }

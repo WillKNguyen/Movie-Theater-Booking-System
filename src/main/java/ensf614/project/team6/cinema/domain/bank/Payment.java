@@ -16,6 +16,7 @@ public class Payment {
     private String creditCardNumber;
 
     private Double amount;
+    private String contactEmail;
 
     private Boolean wasRefunded;
 
@@ -23,9 +24,10 @@ public class Payment {
 
     private LocalDate modificationDate;
 
-    public Payment(String creditCardNumber, Double amount) {
+    public Payment(String creditCardNumber, Double amount, String contactEmail) {
         this.creditCardNumber = creditCardNumber;
         this.amount = amount;
+        this.contactEmail = contactEmail;
 
         wasRefunded=false;
 
@@ -37,7 +39,7 @@ public class Payment {
     public Payment() {
     }
 
-    public Boolean getWasRefunded() {
+    public Boolean wasRefunded() {
         return wasRefunded;
     }
 
@@ -49,5 +51,9 @@ public class Payment {
 
     public Double getAmount() {
         return amount;
+    }
+
+    public String getContactEmail(){
+        return contactEmail;
     }
 }

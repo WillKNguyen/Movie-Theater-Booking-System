@@ -27,16 +27,19 @@ public interface JPATicketRepository extends JpaRepository<Ticket, Integer> {
             "inner join Movie m on tic.movie.id = m.id " +
             "inner join ShowRoom sr on tic.showRoom.id = sr.id "+
             "WHERE m.id = :movieId " +
-            "AND sr.id = :showRoomId")
-    List<LocalDateTime> getMovieStartTimesByMovieIdAndTheater(String movieId, String showRoomId);
+            "AND sr.id = :showRoomId " +
+            "AND tic.showTime between :from and :to")
+    List<LocalDateTime> getMovieStartTimesByMovieIdAndShowRoomId(String movieId, String showRoomId, LocalDateTime from, LocalDateTime to);
 
     @Query(value = "SELECT distinct sr FROM Ticket tic " +
             "inner join Movie m on tic.movie.id = m.id " +
             "inner join ShowRoom sr on tic.showRoom.id = sr.id "+
-            "WHERE m.id = :movieId")
-    List<ShowRoom> getShowRoomsPlayingMovie(String movieId);
+            "WHERE m.id = :movieId " +
+            "AND tic.showTime between :from and :to")
+    List<ShowRoom> getShowRoomsPlayingMovie(String movieId, LocalDateTime from, LocalDateTime to);
 
     @Query(value = "SELECT distinct m FROM Ticket tic " +
-            "inner join Movie m on tic.movie.id = m.id")
-    List<Movie> getAllAvailableMovies();
+            "inner join Movie m on tic.movie.id = m.id " +
+            "where tic.showTime between :from and :to")
+    List<Movie> getAllAvailableMovies(LocalDateTime from, LocalDateTime to);
 }
