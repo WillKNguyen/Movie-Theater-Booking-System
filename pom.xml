@@ -59,6 +59,11 @@
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.6.1</version>
         </dependency>
+        <dependency>
+            <artifactId>javax.mail</artifactId>
+            <groupId>com.sun.mail</groupId>
+            <version>1.6.2</version>
+        </dependency>
     </dependencies>
 
     <build>

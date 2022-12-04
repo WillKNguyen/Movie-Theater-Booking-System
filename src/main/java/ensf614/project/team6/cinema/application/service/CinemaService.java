@@ -44,7 +44,7 @@ public class CinemaService extends GlobalService {
 
         if(ticket.getOwner()!=null) throw new TicketUnavailableException();
 
-        getBank().processPayment(ticket.getPrice(), creditCardNumber);
+        getBank().processPayment(ticket.getPrice(), creditCardNumber, ticket.getOwner().);
         //ticket.setOwner(); TODO Depends on the way we login
         //ticket.setOwner(DEFAULT_USER);
 

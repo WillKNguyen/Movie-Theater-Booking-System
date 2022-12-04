@@ -23,8 +23,7 @@ public class Payment {
 
     private LocalDate modificationDate;
 
-    public Payment(Integer id, String creditCardNumber, Double amount) {
-        this.id = id;
+    public Payment(String creditCardNumber, Double amount) {
         this.creditCardNumber = creditCardNumber;
         this.amount = amount;
 
@@ -46,5 +45,9 @@ public class Payment {
         if(wasRefunded) throw new PaymentAlreadyRefunded();
         wasRefunded=true;
         modificationDate=LocalDate.now();
+    }
+
+    public Double getAmount() {
+        return amount;
     }
 }
