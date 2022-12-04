@@ -29,9 +29,9 @@ public class Payment {
         this.amount = amount;
         this.contactEmail = contactEmail;
 
-        wasRefunded=false;
+        wasRefunded = false;
 
-        LocalDate now=LocalDate.now();
+        LocalDate now = LocalDate.now();
         this.creationDate = now;
         this.modificationDate = now;
     }
@@ -43,17 +43,17 @@ public class Payment {
         return wasRefunded;
     }
 
-    public void markAsRefunded(){
-        if(wasRefunded) throw new PaymentAlreadyRefunded();
-        wasRefunded=true;
-        modificationDate=LocalDate.now();
+    public void markAsRefunded() {
+        if (wasRefunded) throw new PaymentAlreadyRefunded();
+        wasRefunded = true;
+        modificationDate = LocalDate.now();
     }
 
     public Double getAmount() {
         return amount;
     }
 
-    public String getContactEmail(){
+    public String getContactEmail() {
         return contactEmail;
     }
 }

@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ConfigResource {
 
-  @GetMapping("/api")
-  String heartBeat() {
-    return "ENSF614 (Team 6) API is running";
-  }
+    @GetMapping("/api")
+    String heartBeat() {
+        return "ENSF614 (Team 6) API is running";
+    }
 }

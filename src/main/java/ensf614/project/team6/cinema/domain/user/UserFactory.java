@@ -22,7 +22,7 @@ public class UserFactory {
         if (!Pattern.matches(VALID_EMAIL_REGEX, email)) throw new InvalidEmailFormatException();
     }
 
-    private void validatePassword(String password){
+    private void validatePassword(String password) {
         if (password.isBlank()) throw new InvalidEmailFormatException();
     }
 }

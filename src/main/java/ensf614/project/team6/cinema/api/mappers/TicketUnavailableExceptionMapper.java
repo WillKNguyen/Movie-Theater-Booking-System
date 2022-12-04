@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class TicketUnavailableExceptionMapper {
 
-  @ResponseBody
-  @ExceptionHandler(TicketUnavailableException.class)
-  @ResponseStatus(HttpStatus.BAD_REQUEST)
-  String handler() {
-    return "Ticket not available for purchase";
-  }
+    @ResponseBody
+    @ExceptionHandler(TicketUnavailableException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    String handler() {
+        return "Ticket not available for purchase";
+    }
 }

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class ScheduleResponse {
     private final String moment;
 
-    public ScheduleResponse(LocalDateTime moment){
-        this.moment=moment.toString();
+    public ScheduleResponse(LocalDateTime moment) {
+        this.moment = moment.toString();
     }
 }

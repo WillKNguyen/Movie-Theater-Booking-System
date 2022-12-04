@@ -3,7 +3,6 @@ package ensf614.project.team6.cinema.api.config.auth;
 import ensf614.project.team6.cinema.application.service.UserService;
 import ensf614.project.team6.cinema.application.service.exceptions.UserNotFoundException;
 import ensf614.project.team6.cinema.domain.user.User;
-import ensf614.project.team6.cinema.domain.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class UserNotFoundExceptionMapper {
 
-  @ResponseBody
-  @ExceptionHandler(UserNotFoundException.class)
-  @ResponseStatus(HttpStatus.NOT_FOUND)
-  String handler() {
-    return "User not found";
-  }
+    @ResponseBody
+    @ExceptionHandler(UserNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    String handler() {
+        return "User not found";
+    }
 }

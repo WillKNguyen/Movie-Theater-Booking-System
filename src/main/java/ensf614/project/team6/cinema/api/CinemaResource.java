@@ -1,8 +1,8 @@
 package ensf614.project.team6.cinema.api;
 
 import ensf614.project.team6.cinema.application.service.CinemaService;
-import ensf614.project.team6.cinema.application.service.response.ScheduleResponse;
 import ensf614.project.team6.cinema.application.service.response.MovieResponse;
+import ensf614.project.team6.cinema.application.service.response.ScheduleResponse;
 import ensf614.project.team6.cinema.application.service.response.SeatResponse;
 import ensf614.project.team6.cinema.application.service.response.ShowRoomResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,21 +22,22 @@ public class CinemaResource {
     private CinemaService cinemaService;
 
     @GetMapping("/public/cinema/movies")
-    public List<MovieResponse> getMovies() {
-        return cinemaService.getAvailableMovies();
+    public List<MovieResponse> getMovies(Principal principal) {
+        return cinemaService.getAvailableMovies(principal != null);
     }
 
-    @GetMapping("/public/cinemashow_rooms")
-    public List<ShowRoomResponse> getShowRooms(@RequestParam("movie_id") String movieId) {
-        return cinemaService.getShowRoomsPlayingMovie(movieId);
+    @GetMapping("/public/cinema/show_rooms")
+    public List<ShowRoomResponse> getShowRooms(Principal principal, @RequestParam("movie_id") String movieId) {
+        return cinemaService.getShowRoomsPlayingMovie(movieId, principal != null);
     }
 
-    @GetMapping("/public/cinemaschedule")
-    public List<ScheduleResponse> getSchedules(@RequestParam("movie_id") String movieId, @RequestParam("show_room_id") String showRoomId) {
-        return cinemaService.getScheduleForMovieInShowRoom(movieId, showRoomId);
+    @GetMapping("/public/cinema/schedule")
+    public List<ScheduleResponse> getSchedules(Principal principal, @RequestParam("movie_id") String movieId,
+                                               @RequestParam("show_room_id") String showRoomId) {
+        return cinemaService.getScheduleForMovieInShowRoom(movieId, showRoomId, principal != null);
     }
 
-    @GetMapping("/public/cinemaseats")
+    @GetMapping("/public/cinema/seats")
     public List<SeatResponse> getSeats(@RequestParam("movie_id") String movieId, @RequestParam("show_room_id") String showRoomId,
                                        @RequestParam("start_time") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") LocalDateTime startTime) {
         return cinemaService.getAvailableSeats(movieId, showRoomId, startTime);

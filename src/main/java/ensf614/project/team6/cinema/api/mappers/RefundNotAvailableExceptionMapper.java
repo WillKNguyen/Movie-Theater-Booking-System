@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class RefundNotAvailableExceptionMapper {
 
-  @ResponseBody
-  @ExceptionHandler(RefundNotAvailable.class)
-  @ResponseStatus(HttpStatus.BAD_REQUEST)
-  String handler() {
-    return "You can't refund this ticket";
-  }
+    @ResponseBody
+    @ExceptionHandler(RefundNotAvailable.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    String handler() {
+        return "You can't refund this ticket";
+    }
 }

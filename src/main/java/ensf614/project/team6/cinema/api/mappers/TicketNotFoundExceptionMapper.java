@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class TicketNotFoundExceptionMapper {
 
-  @ResponseBody
-  @ExceptionHandler(TicketNotFoundException.class)
-  @ResponseStatus(HttpStatus.NOT_FOUND)
-  String handler() {
-    return "Ticket not found";
-  }
+    @ResponseBody
+    @ExceptionHandler(TicketNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    String handler() {
+        return "Ticket not found";
+    }
 }

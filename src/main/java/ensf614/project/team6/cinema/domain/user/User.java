@@ -4,12 +4,9 @@ import ensf614.project.team6.cinema.domain.bank.Payment;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
@@ -29,7 +26,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Payment> membershipPayments;
 
     public User(String name, String email, String password, String creditCardNumber, Set<Role> roles) {
@@ -41,7 +38,7 @@ public class User {
 
         this.membershipPayments = new ArrayList<>();
 
-        this.endOfSubscription=LocalDate.of(2000,1,1);
+        this.endOfSubscription = LocalDate.of(2000, 1, 1);
     }
 
     public User() {
@@ -54,6 +51,7 @@ public class User {
     public String getPassword() {
         return password;
     }
+
     public String getCreditCardNumber() {
         return creditCardNumber;
     }
@@ -63,13 +61,14 @@ public class User {
     }
 
     public void setEndOfSubscription(LocalDate endOfSubscription) {
-        this.endOfSubscription=endOfSubscription;
+        this.endOfSubscription = endOfSubscription;
     }
+
     public List<Role> getRoles() {
         return roles;
     }
 
-    public void addMembershipPayment(Payment payment){
+    public void addMembershipPayment(Payment payment) {
         membershipPayments.add(payment);
     }
 }

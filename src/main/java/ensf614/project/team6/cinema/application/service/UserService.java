@@ -1,25 +1,25 @@
 package ensf614.project.team6.cinema.application.service;
 
 import ensf614.project.team6.cinema.application.service.exceptions.RoleNotFoundException;
-import ensf614.project.team6.cinema.application.service.request.CredentialsRequest;
-import ensf614.project.team6.cinema.application.service.request.UserInfoRequest;
 import ensf614.project.team6.cinema.application.service.exceptions.UserAlreadyExistsException;
 import ensf614.project.team6.cinema.application.service.exceptions.UserNotFoundException;
-
+import ensf614.project.team6.cinema.application.service.request.UserInfoRequest;
 import ensf614.project.team6.cinema.domain.bank.Payment;
-import ensf614.project.team6.cinema.domain.user.*;
+import ensf614.project.team6.cinema.domain.user.Role;
+import ensf614.project.team6.cinema.domain.user.RoleRepository;
+import ensf614.project.team6.cinema.domain.user.User;
+import ensf614.project.team6.cinema.domain.user.UserFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.Collections;
-import java.util.Optional;
 
 @Component
-public class UserService extends GlobalService{
+public class UserService extends GlobalService {
 
-    private final static String USER_ROLE="ROLE_USER";
-    private final static Double MEMBERSHIP_FEE=20.0;
+    private final static String USER_ROLE = "ROLE_USER";
+    private final static Double MEMBERSHIP_FEE = 20.0;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -27,10 +27,10 @@ public class UserService extends GlobalService{
     private UserFactory userFactory;
 
     public void registerUser(UserInfoRequest userInfoRequest) {
-        if (getUserRepository().findUserByEmail(userInfoRequest.getEmail()).isPresent())
+        if (findUserByEmail(userInfoRequest.getEmail()).isPresent())
             throw new UserAlreadyExistsException();
 
-        Role role=roleRepository.findRoleByTitle(USER_ROLE).orElseThrow(RoleNotFoundException::new);
+        Role role = roleRepository.findRoleByTitle(USER_ROLE).orElseThrow(RoleNotFoundException::new);
 
         User user = userFactory.createUser(userInfoRequest.getName(), userInfoRequest.getEmail(),
                 userInfoRequest.getPassword(), userInfoRequest.getCreditCardNumber(), Collections.singleton(role));
@@ -38,14 +38,10 @@ public class UserService extends GlobalService{
         getUserRepository().saveUser(user);
     }
 
-    public Optional<User> findUserByEmail(String email) {
-        return getUserRepository().findUserByEmail(email);
-    }
-
     public void payMembership(String email) {
-        User user=getUserRepository().findUserByEmail(email).orElseThrow(UserNotFoundException::new);
+        User user = findUserByEmail(email).orElseThrow(UserNotFoundException::new);
 
-        Payment payment=getBank().processPayment(MEMBERSHIP_FEE, user.getCreditCardNumber(), email, "Yearly Membership");
+        Payment payment = getBank().processPayment(MEMBERSHIP_FEE, user.getCreditCardNumber(), email, "Yearly Membership");
 
         user.addMembershipPayment(payment);
         user.setEndOfSubscription(LocalDate.now().plusYears(1));

@@ -16,18 +16,18 @@ public class BankDummy implements Bank {
 
     public BankDummy() {
         ServerAccessSessionGenerator sessionGenerator = new GmailServerAccessSessionGenerator();
-        smtpEmailSender=new SMTPEmailSender(sessionGenerator);
+        smtpEmailSender = new SMTPEmailSender(sessionGenerator);
     }
 
     @Override
     public Payment processPayment(Double amount, String creditCardNumber, String email, String description) {
         validateCreditCard(creditCardNumber);
 
-        System.out.println("Payment processed: "+amount+"$");
+        System.out.println("Payment processed: " + amount + "$");
 
-        smtpEmailSender.sendMessage(email,"Your payment made to CINEMA-ENSF614-TEAM6 for "+amount+"$ was processed successfully.\n\n"+ description);
+        smtpEmailSender.sendMessage(email, "Your payment made to CINEMA-ENSF614-TEAM6 for " + amount + "$ was processed successfully.\n\n" + description);
 
-        return new Payment(creditCardNumber,amount, email);
+        return new Payment(creditCardNumber, amount, email);
     }
 
     @Override
@@ -36,17 +36,17 @@ public class BankDummy implements Bank {
 
         paymentToRefund.markAsRefunded();
 
-        System.out.println("Payment refunded ("+prcRefunded+"%): " +paymentToRefund.getAmount()*prcRefunded/100+"$");
+        System.out.println("Payment refunded (" + prcRefunded + "%): " + paymentToRefund.getAmount() * prcRefunded / 100 + "$");
 
-        smtpEmailSender.sendMessage(paymentToRefund.getContactEmail(),"Your payment made to CINEMA-ENSF614-TEAM6 for "+paymentToRefund.getAmount()*prcRefunded/100+"$ ("+prcRefunded+"%) was refunded successfully");
+        smtpEmailSender.sendMessage(paymentToRefund.getContactEmail(), "Your payment made to CINEMA-ENSF614-TEAM6 for " + paymentToRefund.getAmount() * prcRefunded / 100 + "$ (" + prcRefunded + "%) was refunded successfully");
         return paymentToRefund;
     }
 
-    private void validateCreditCard(String creditCardNumber){
-        if(creditCardNumber.isBlank()) throw new InvalidCreditCardNumber();
+    private void validateCreditCard(String creditCardNumber) {
+        if (creditCardNumber.isBlank()) throw new InvalidCreditCardNumber();
     }
 
-    private void validatePayment(Payment payment){
-        if(payment.wasRefunded()) throw new PaymentAlreadyRefunded();
+    private void validatePayment(Payment payment) {
+        if (payment.wasRefunded()) throw new PaymentAlreadyRefunded();
     }
 }

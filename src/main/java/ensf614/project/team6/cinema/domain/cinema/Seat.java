@@ -10,7 +10,6 @@ public class Seat {
     private Integer id;
     private String number;
 
-
     public Integer getId() {
         return id;
     }

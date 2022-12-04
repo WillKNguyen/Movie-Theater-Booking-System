@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class PaymentAlreadyRefundedExceptionMapper {
 
-  @ResponseBody
-  @ExceptionHandler(PaymentAlreadyRefunded.class)
-  @ResponseStatus(HttpStatus.UNAUTHORIZED)
-  String handler() {
-    return "A payment cannot be refunded twice";
-  }
+    @ResponseBody
+    @ExceptionHandler(PaymentAlreadyRefunded.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    String handler() {
+        return "A payment cannot be refunded twice";
+    }
 }

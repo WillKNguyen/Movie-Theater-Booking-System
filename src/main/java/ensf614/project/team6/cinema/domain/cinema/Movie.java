@@ -3,7 +3,7 @@ package ensf614.project.team6.cinema.domain.cinema;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tickets")
+@Table(name = "movies")
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

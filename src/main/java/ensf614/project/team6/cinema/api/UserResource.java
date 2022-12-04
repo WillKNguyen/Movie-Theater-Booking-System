@@ -1,11 +1,8 @@
 package ensf614.project.team6.cinema.api;
 
-import ensf614.project.team6.cinema.application.service.request.CredentialsRequest;
-import ensf614.project.team6.cinema.application.service.request.UserInfoRequest;
 import ensf614.project.team6.cinema.application.service.UserService;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import ensf614.project.team6.cinema.application.service.request.UserInfoRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 

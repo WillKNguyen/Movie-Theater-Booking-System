@@ -1,6 +1,5 @@
 package ensf614.project.team6.cinema.infrastructure.user;
 
-import ensf614.project.team6.cinema.domain.user.Role;
 import ensf614.project.team6.cinema.domain.user.User;
 import ensf614.project.team6.cinema.domain.user.UserRepository;
 import ensf614.project.team6.cinema.infrastructure.user.jpa.JPAUserRepository;
@@ -8,17 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Component
 public class JPAUserRepositoryAdapter implements UserRepository {
 
-    private final static List<String> DEFAULT_NAMES = Arrays.asList("admin@ensf614.ca");
-    private final static List<String> DEFAULT_EMAILS = Arrays.asList("admin@ensf614.ca");
-    private final static List<String> DEFAULT_PASSWORDS = Arrays.asList("admin@ensf614.ca");
+    private final static List<String> DEFAULT_NAMES = List.of("admin@ensf614.ca");
+    private final static List<String> DEFAULT_EMAILS = List.of("admin@ensf614.ca");
+    private final static List<String> DEFAULT_PASSWORDS = List.of("admin@ensf614.ca");
 
     private final static List<Set<String>> DEFAULT_ROLES = new ArrayList<>() {{
-        add(new HashSet<>(Arrays.asList("ROLE_ADMIN")));
+        add(new HashSet<>(List.of("ROLE_ADMIN")));
     }};
 
     @Autowired

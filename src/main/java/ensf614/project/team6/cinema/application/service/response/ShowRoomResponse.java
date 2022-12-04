@@ -11,8 +11,8 @@ public class ShowRoomResponse {
     private final String id;
     private final String name;
 
-    public ShowRoomResponse(ShowRoom showRoom){
-        this.id=String.valueOf(showRoom.getId());
-        this.name= showRoom.getName();
+    public ShowRoomResponse(ShowRoom showRoom) {
+        this.id = String.valueOf(showRoom.getId());
+        this.name = showRoom.getName();
     }
 }
