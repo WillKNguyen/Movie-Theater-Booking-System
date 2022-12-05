@@ -22,9 +22,10 @@ public class UserResource {
     //login is handled by the spring security framework
 
     @PostMapping("/public/user/register")
-    public void registerUser(UserInfoRequest userInfoRequest) {
+    public void registerUser(UserInfoRequest userInfoRequest, HttpServletResponse response) {
         userInfoRequest.setPassword(passwordEncoder.encode(userInfoRequest.getPassword()));
         userService.registerUser(userInfoRequest);
+        login(response);
     }
 
     @GetMapping("/public/user/login")
