@@ -1,4 +1,4 @@
-package ensf614.project.team6.cinema.infrastructure.ticket.jpa;
+package ensf614.project.team6.cinema.infrastructure.cinema.jpa;
 
 import ensf614.project.team6.cinema.domain.cinema.Movie;
 import ensf614.project.team6.cinema.domain.cinema.ShowRoom;

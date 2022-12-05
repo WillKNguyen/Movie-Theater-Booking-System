@@ -1,10 +1,10 @@
-package ensf614.project.team6.cinema.infrastructure.ticket;
+package ensf614.project.team6.cinema.infrastructure.cinema;
 
 import ensf614.project.team6.cinema.domain.cinema.Movie;
 import ensf614.project.team6.cinema.domain.cinema.ShowRoom;
 import ensf614.project.team6.cinema.domain.cinema.Ticket;
 import ensf614.project.team6.cinema.domain.cinema.TicketRepository;
-import ensf614.project.team6.cinema.infrastructure.ticket.jpa.JPATicketRepository;
+import ensf614.project.team6.cinema.infrastructure.cinema.jpa.JPATicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
