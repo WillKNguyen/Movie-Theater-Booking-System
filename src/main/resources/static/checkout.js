@@ -1,4 +1,13 @@
-const container =document.querySelector('#container');
+const container = document.querySelector('#container');
+
+const homeContainer = document.createElement("div");
+const home = document.createElement("button");
+const homeLink = document.createElement("a");
+homeLink.href = "http://localhost:8080";
+homeLink.textContent = "Return Home";
+home.appendChild(homeLink)
+homeContainer.appendChild(home)
+container.appendChild(homeContainer);
 
 const header = document.createElement('h1');
 header.textContent = "Check Out";
@@ -7,14 +16,9 @@ var theater = sessionStorage.getItem("theater_name");
 var time = sessionStorage.getItem("time");
 var seat = sessionStorage.getItem("seatnumber")
 
-const home = document.createElement("button");
-const homeLink = document.createElement("a");
-homeLink.href = "http://localhost:8080";
-homeLink.textContent = "Return Home";
-home.appendChild(homeLink)
 
 const table = document.createElement('table');
-let tab = 
+let tab =
     `<tr> 
         <th>Details</th>
         <th>Value</th>
@@ -68,17 +72,16 @@ container.appendChild(prompt);
 container.appendChild(eInput);
 container.appendChild(ccInput);
 container.appendChild(button);
-container.appendChild(home);
 
 
-button.onclick = function() {
+button.onclick = function () {
     let email = document.querySelector('#email').value;
     email = email.replace('@', '%40')
 
     const ccNum = document.querySelector('#cc').value;
 
-    let url = "http://localhost:8080/api/public/cinema/purchase_ticket?ticket_id=" + sessionStorage.getItem("seatID") 
-    + "&credit_card=" + ccNum + "&email=" + email;
+    let url = "http://localhost:8080/api/public/cinema/purchase_ticket?ticket_id=" + sessionStorage.getItem("seatID")
+        + "&credit_card=" + ccNum + "&email=" + email;
     const confirmationMessage = document.createElement("h3");
 
     function handleErrors(response) {
@@ -87,19 +90,19 @@ button.onclick = function() {
         }
         return response;
     }
-    
+
     fetch(url)
         .then(handleErrors)
-        .then(function(response) {
+        .then(function (response) {
             console.log("ok");
             confirmationMessage.textContent = "Ticket bought!";
             confirmationMessage.style.backgroundColor = "green";
-        }).catch(function(error) {
-            console.log(error);
-            confirmationMessage.textContent = "Something wrong! Please try again";
-            confirmationMessage.style.backgroundColor = "red";
-        });
+        }).catch(function (error) {
+        console.log(error);
+        confirmationMessage.textContent = "Something wrong! Please try again";
+        confirmationMessage.style.backgroundColor = "red";
+    });
 
     container.appendChild(confirmationMessage);
-    
+
 }
