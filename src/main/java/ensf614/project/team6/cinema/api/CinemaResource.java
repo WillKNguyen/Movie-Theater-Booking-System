@@ -39,7 +39,7 @@ public class CinemaResource {
 
     @GetMapping("/public/cinema/seats")
     public List<SeatResponse> getSeats(@RequestParam("movie_id") String movieId, @RequestParam("show_room_id") String showRoomId,
-                                       @RequestParam("start_time") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") LocalDateTime startTime) {
+                                       @RequestParam("start_time") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime) {
         return cinemaService.getAvailableSeats(movieId, showRoomId, startTime);
     }
 

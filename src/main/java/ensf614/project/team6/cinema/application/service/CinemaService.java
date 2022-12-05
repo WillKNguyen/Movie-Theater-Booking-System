@@ -59,8 +59,8 @@ public class CinemaService extends GlobalService {
 
         boolean showReservationSeats = (reservedSeats + 1) / totalNbrSeats >= MAX_PRC_RESERVED_SEATS / 100;
 
-        return ticketRepository.getTickets(movieId, showRoomId, startTime).stream()
-                .filter(Ticket::isAvailable).filter(ticket -> showReservationSeats || ticket.getShowTime().isBefore(maxFutureAvailability))
+        return consideredTickets.stream().filter(Ticket::isAvailable)
+                .filter(ticket -> showReservationSeats || ticket.getShowTime().isBefore(maxFutureAvailability))
                 .map(SeatResponse::new).distinct().collect(Collectors.toList());
     }
 
