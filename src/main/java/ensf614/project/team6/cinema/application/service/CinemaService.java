@@ -9,6 +9,7 @@ import ensf614.project.team6.cinema.application.service.response.SeatResponse;
 import ensf614.project.team6.cinema.application.service.response.ShowRoomResponse;
 import ensf614.project.team6.cinema.domain.bank.Payment;
 import ensf614.project.team6.cinema.domain.bank.exceptions.RefundNotAvailable;
+import ensf614.project.team6.cinema.domain.cinema.ShowRoom;
 import ensf614.project.team6.cinema.domain.cinema.Ticket;
 import ensf614.project.team6.cinema.domain.cinema.TicketRepository;
 import ensf614.project.team6.cinema.domain.user.User;
@@ -31,17 +32,20 @@ public class CinemaService extends GlobalService {
 
     public List<MovieResponse> getAvailableMovies(boolean isAuthenticated) {
         LocalDateTime[] availabilityPeriod = getStartAndEndDateForSearch(isAuthenticated);
-        return ticketRepository.getAllMovies(availabilityPeriod[0], availabilityPeriod[1]).stream().map(MovieResponse::new).collect(Collectors.toList());
+        return ticketRepository.getAllMovies(availabilityPeriod[0], availabilityPeriod[1]).stream().map(MovieResponse::new)
+                .collect(Collectors.toList());
     }
 
     public List<ShowRoomResponse> getShowRoomsPlayingMovie(String movieId, boolean isAuthenticated) {
         LocalDateTime[] availabilityPeriod = getStartAndEndDateForSearch(isAuthenticated);
-        return ticketRepository.getShowRoomsPlayingMovie(movieId, availabilityPeriod[0], availabilityPeriod[1]).stream().map(ShowRoomResponse::new).distinct().collect(Collectors.toList());
+        return ticketRepository.getShowRoomsPlayingMovie(movieId, availabilityPeriod[0], availabilityPeriod[1]).stream()
+                .filter(ShowRoom::isAvailableForScreening).map(ShowRoomResponse::new).distinct().collect(Collectors.toList());
     }
 
     public List<ScheduleResponse> getScheduleForMovieInShowRoom(String movieId, String showRoomId, boolean isAuthenticated) {
         LocalDateTime[] availabilityPeriod = getStartAndEndDateForSearch(isAuthenticated);
-        return ticketRepository.getMovieStartTimes(movieId, showRoomId, availabilityPeriod[0], availabilityPeriod[1]).stream().map(ScheduleResponse::new).distinct().collect(Collectors.toList());
+        return ticketRepository.getMovieStartTimes(movieId, showRoomId, availabilityPeriod[0], availabilityPeriod[1]).stream()
+                .map(ScheduleResponse::new).distinct().collect(Collectors.toList());
     }
 
     public List<SeatResponse> getAvailableSeats(String movieId, String showRoomId, LocalDateTime startTime) {

@@ -7,18 +7,24 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>CineWorld</h1>
-    
-    <form action="/api/private/user/pay_membership" method="post" target="hiddenFrame">
-        <button id="alert-button" onclick="alert('Membership has been paid!');">Pay Membership</button>
-    </form>
+<h1>CineWorld</h1>
 
-    <div> <button> <a href="http://localhost:8080/logout">Log Out</a> </button> </div>
-    
-    <div> <button> <a href="http://localhost:8080/movie_list">Search Movies</a> </button> </div>
+<form action="/api/private/user/pay_membership" method="post" target="hiddenFrame">
+    <button id="alert-button" onclick="alert('Membership has been paid!');">Pay Membership</button>
+</form>
 
-    <div> <button> <a href="http://localhost:8080/refund">Cancel Ticket</a> </button> </div>
+<div>
+    <button><a href="http://localhost:8080/logout">Log Out</a></button>
+</div>
 
-    <iframe name="hiddenFrame" width="0" height="0" border="0" style="display: none;"></iframe>
+<div>
+    <button><a href="http://localhost:8080/movie_list">Search Movies</a></button>
+</div>
+
+<div>
+    <button><a href="http://localhost:8080/refund">Cancel Ticket</a></button>
+</div>
+
+<iframe name="hiddenFrame" width="0" height="0" border="0" style="display: none;"></iframe>
 </body>
 </html>

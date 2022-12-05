@@ -9,6 +9,7 @@ public class ShowRoom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    private Boolean isAvailableForScreening;
 
     public Integer getId() {
         return id;
@@ -18,5 +19,15 @@ public class ShowRoom {
         return name;
     }
 
+    public Boolean isAvailableForScreening() {
+        return isAvailableForScreening;
+    }
 
+    public void closeShowRoom() {
+        isAvailableForScreening = true;
+    }
+
+    public void openShowRoom() {
+        isAvailableForScreening = false;
+    }
 }

@@ -1,4 +1,4 @@
-const container =document.querySelector('#container');
+const container = document.querySelector('#container');
 
 const homeContainer = document.createElement("div");
 const home = document.createElement("button");
@@ -17,7 +17,7 @@ var time = sessionStorage.getItem("time");
 var seat = sessionStorage.getItem("seatnumber")
 
 const table = document.createElement('table');
-let tab = 
+let tab =
     `<tr> 
         <th>Details</th>
         <th>Value</th>
@@ -50,7 +50,7 @@ container.appendChild(header);
 container.appendChild(table);
 
 
-let url = "http://localhost:8080/api/private/cinema/purchase_ticket?ticket_id=" + sessionStorage.getItem("seatID") 
+let url = "http://localhost:8080/api/private/cinema/purchase_ticket?ticket_id=" + sessionStorage.getItem("seatID")
 const confirmationMessage = document.createElement("h3");
 
 function handleErrors(response) {
@@ -62,14 +62,14 @@ function handleErrors(response) {
 
 fetch(url)
     .then(handleErrors)
-    .then(function(response) {
+    .then(function (response) {
         console.log("ok");
         confirmationMessage.textContent = "Ticket bought!";
         confirmationMessage.style.backgroundColor = "green";
-    }).catch(function(error) {
-        console.log(error);
-        confirmationMessage.textContent = "Something wrong! Please try again";
-        confirmationMessage.style.backgroundColor = "red";
-    });
+    }).catch(function (error) {
+    console.log(error);
+    confirmationMessage.textContent = "Something wrong! Please try again";
+    confirmationMessage.style.backgroundColor = "red";
+});
 
 container.appendChild(confirmationMessage);

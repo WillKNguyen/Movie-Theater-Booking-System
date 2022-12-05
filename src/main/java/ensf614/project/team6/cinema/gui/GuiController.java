@@ -1,9 +1,9 @@
 package ensf614.project.team6.cinema.gui;
 
-import java.security.Principal;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.security.Principal;
 
 @Controller
 public class GuiController {
@@ -12,8 +12,7 @@ public class GuiController {
     public String index(Principal princpial) {
         try {
             princpial.getName();
-        }
-        catch(Exception nullPointerException) {
+        } catch (Exception nullPointerException) {
             return "index";
         }
         return "index_auth";
@@ -34,8 +33,7 @@ public class GuiController {
     public String checkout(Principal princpial) {
         try {
             princpial.getName();
-        }
-        catch(Exception nullPointerException) {
+        } catch (Exception nullPointerException) {
             return "purchase_ticket";
         }
         return "purchase_ticket_auth";
