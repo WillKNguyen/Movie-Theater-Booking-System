@@ -56,7 +56,7 @@ public class CinemaService extends GlobalService {
         LocalDateTime maxFutureAvailability = LocalDateTime.now().plusDays(NBR_DAYS_FUTURE_AVAILABILITY);
 
         for (Ticket ticket : consideredTickets) {
-            if (ticket.getShowTime().isAfter(maxFutureAvailability)) {
+            if (ticket.getShowTime().isAfter(maxFutureAvailability) && !ticket.isAvailable()) {
                 reservedSeats++;
             }
         }
