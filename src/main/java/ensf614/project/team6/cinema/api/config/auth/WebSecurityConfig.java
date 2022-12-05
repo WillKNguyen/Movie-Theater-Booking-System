@@ -27,7 +27,10 @@ public class WebSecurityConfig {
                 .defaultSuccessUrl("/")
                 .permitAll()
                 .and()
-                .logout(LogoutConfigurer::permitAll);
+                .logout()
+                    .permitAll()
+                    .logoutSuccessUrl("/");
+                
 
         return http.build();
     }

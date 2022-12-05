@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="payMembership.js" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>Shittyplex</h1>
+    
+    <form action="/api/private/user/pay_membership" method="post" target="hiddenFrame">
+        <button id="alert-button" onclick="alert('Membership has been paid!');">Pay Membership</button>
+    </form>
+
+    <div> <button> <a href="http://localhost:8080/logout">Log Out</a> </button> </div>
+    
+    <div> <button> <a href="http://localhost:8080/movie_list">Search Movies</a> </button> </div>
+
+    <iframe name="hiddenFrame" width="0" height="0" border="0" style="display: none;"></iframe>
+</body>
+</html>
