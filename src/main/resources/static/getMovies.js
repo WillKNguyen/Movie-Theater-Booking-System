@@ -142,7 +142,7 @@ function getTicket(){
         header.style.backgroundColor = 'green';
         let time = document.querySelector('#time_text').value;
         sessionStorage.setItem('time', time);
-        time = time.replace('T', '%20');
+        time = time.replace(':', '%3A');
         url = "http://localhost:8080/api/public/cinema/seats?movie_id=" + sessionStorage.getItem("movie_id") + "&show_room_id=" + sessionStorage.getItem("theater_id") 
             + "&start_time=" + time;
         console.log(url)
@@ -151,28 +151,28 @@ function getTicket(){
         const result = async() => {
             const a = await data;
             console.log(a);
-            const table = document.createElement('table');
+            // const table = document.createElement('table');
             let availableSeats = {};
-            let tab = 
-                `<tr> 
-                    <th>Ticket ID</th>
-                    <th>Seat Number</th>
-                    <th>Related Ticket ID</th>
-                </tr>`;
+            // let tab = 
+            //     `<tr> 
+            //         <th>Ticket ID</th>
+            //         <th>Seat Number</th>
+            //         <th>Related Ticket ID</th>
+            //     </tr>`;
 
             for (let r in a){
                 availableSeats[Number(a[r].number)] = Number(a[r].relatedTicketId);
-                tab += `
-                    <tr>
-                        <td>${a[r].id}</td>
-                        <td>${a[r].number}</td>
-                        <td>${a[r].relatedTicketId}</td>
-                    </tr>`;
+                // tab += `
+                //     <tr>
+                //         <td>${a[r].id}</td>
+                //         <td>${a[r].number}</td>
+                //         <td>${a[r].relatedTicketId}</td>
+                //     </tr>`;
             }
             console.log(availableSeats)
-            table.innerHTML = tab;
+            // table.innerHTML = tab;
             container.appendChild(header);
-            container.appendChild(table);
+            // container.appendChild(table);
             seatMap(availableSeats);
         };    
         result();
@@ -180,8 +180,12 @@ function getTicket(){
 }
 
 function seatMap(availableSeats){
-    seatRow(1,5, availableSeats);
-    seatRow(6,10, availableSeats);
+    seatRow(1,6, availableSeats);
+    seatRow(7,12, availableSeats);
+    seatRow(13,18, availableSeats);
+    seatRow(19,24, availableSeats);
+    seatRow(25,30, availableSeats);
+
     // seatListener();
 }
 

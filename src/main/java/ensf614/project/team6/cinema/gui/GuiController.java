@@ -29,4 +29,21 @@ public class GuiController {
     public String register() {
         return "register";
     }
+
+    @GetMapping("checkout")
+    public String checkout(Principal princpial) {
+        try {
+            princpial.getName();
+        }
+        catch(Exception nullPointerException) {
+            return "purchase_ticket";
+        }
+        return "purchase_ticket_auth";
+
+    }
+
+    @GetMapping("refund")
+    public String refund() {
+        return "refund";
+    }
 }
