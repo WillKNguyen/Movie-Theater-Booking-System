@@ -2,6 +2,7 @@ var url = "http://localhost:8080/api/public/cinema/movies";
 const container =document.querySelector('#container');
 var movies = {};
 var theaters = {};
+var times = {};
 
 async function getAPI(url){
     const response = await fetch(url);
@@ -59,10 +60,14 @@ function createInputBar(text_id, type, but_id, prompt){
 function getTheater(){
     const mBtn = document.querySelector('#mov_but');
     mBtn.onclick = () => {
+        const mov_id = document.querySelector('#mov_text').value;
+        if (!(mov_id in movies)) {
+            alert("Movie not found");
+            return;
+        }
         const header = document.createElement('h1');
         header.innerText = "Show Room List";
         header.style.backgroundColor = 'green';
-        const mov_id = document.querySelector('#mov_text').value;
         sessionStorage.setItem("movie_id", mov_id);
         sessionStorage.setItem("movie_name", movies[mov_id]);
         url = "http://localhost:8080/api/public/cinema/show_rooms?movie_id=" + mov_id;
@@ -99,10 +104,15 @@ function getTheater(){
 function getTime(){
     const tBtn = document.querySelector('#theater_but');
     tBtn.onclick = () => {
+        const theater_id = document.querySelector('#theater_text').value;
+        if (!(theater_id in theaters)) {
+            alert("Show room not found");
+            return;
+        }
+
         const header = document.createElement('h1');
         header.innerText = "Showtime List";
         header.style.backgroundColor = 'green';
-        const theater_id = document.querySelector('#theater_text').value;
         sessionStorage.setItem("theater_id", theater_id);
         sessionStorage.setItem("theater_name", theaters[theater_id]);
         url = "http://localhost:8080/api/public/cinema/schedule?movie_id=" + sessionStorage.getItem("movie_id") + "&show_room_id=" + theater_id;
@@ -118,6 +128,7 @@ function getTime(){
                 </tr>`;
 
             for (let r in a){
+                times[a[r].moment] = 1;
                 tab += `
                     <tr>
                         <td>${a[r].moment}</td>
@@ -137,10 +148,14 @@ function getTime(){
 function getTicket(){
     const tBtn = document.querySelector('#time_but');
     tBtn.onclick = () => {
+        let time = document.querySelector('#time_text').value;
+        if (!(time in times)) {
+            alert("Time not found");
+            return;
+    }
         const header = document.createElement('h1');
         header.innerText = "Available Tickets";
         header.style.backgroundColor = 'green';
-        let time = document.querySelector('#time_text').value;
         sessionStorage.setItem('time', time);
         time = time.replace(':', '%3A');
         url = "http://localhost:8080/api/public/cinema/seats?movie_id=" + sessionStorage.getItem("movie_id") + "&show_room_id=" + sessionStorage.getItem("theater_id") 
@@ -151,28 +166,13 @@ function getTicket(){
         const result = async() => {
             const a = await data;
             console.log(a);
-            // const table = document.createElement('table');
             let availableSeats = {};
-            // let tab = 
-            //     `<tr> 
-            //         <th>Ticket ID</th>
-            //         <th>Seat Number</th>
-            //         <th>Related Ticket ID</th>
-            //     </tr>`;
 
             for (let r in a){
                 availableSeats[Number(a[r].number)] = Number(a[r].relatedTicketId);
-                // tab += `
-                //     <tr>
-                //         <td>${a[r].id}</td>
-                //         <td>${a[r].number}</td>
-                //         <td>${a[r].relatedTicketId}</td>
-                //     </tr>`;
             }
             console.log(availableSeats)
-            // table.innerHTML = tab;
             container.appendChild(header);
-            // container.appendChild(table);
             seatMap(availableSeats);
         };    
         result();
@@ -185,8 +185,6 @@ function seatMap(availableSeats){
     seatRow(13,18, availableSeats);
     seatRow(19,24, availableSeats);
     seatRow(25,30, availableSeats);
-
-    // seatListener();
 }
 
 function seatRow(start, end, availableSeats){

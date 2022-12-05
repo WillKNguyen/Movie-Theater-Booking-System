@@ -1,5 +1,14 @@
 const container = document.querySelector('#container');
 
+const homeContainer = document.createElement("div");
+const home = document.createElement("button");
+const homeLink = document.createElement("a");
+homeLink.href = "http://localhost:8080";
+homeLink.textContent = "Return Home";
+home.appendChild(homeLink)
+homeContainer.appendChild(home)
+container.appendChild(homeContainer);
+
 const input = document.createElement('input');
 input.type = 'text';
 input.id = 'ticketID';
@@ -37,3 +46,5 @@ button.onclick = function(){
 
     container.appendChild(confirmationMessage);
 }
+
+
